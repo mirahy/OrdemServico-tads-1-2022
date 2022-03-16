@@ -1,4 +1,4 @@
-package com.example.introducao;
+package br.edu.ifms.ordem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
