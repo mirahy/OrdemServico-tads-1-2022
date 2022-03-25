@@ -1,0 +1,1 @@
+INSERT INTO TB_TECNICO (nome, telefone, email, senha)VALUES('Mirahy Fonseca', '6709999-9999', 'mirahy@gmail.com', '12345');
