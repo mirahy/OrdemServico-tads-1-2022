@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.edu.ifms.ordem.dto.TecnicoDTO;
 import br.edu.ifms.ordem.entities.Tecnico;
 import br.edu.ifms.ordem.repositories.TecnicoRepository;
-import br.edu.ifms.ordem.services.exceptions.EntityNotFoundExcepetion;
+import br.edu.ifms.ordem.services.exceptions.ResourceNotFoundExcepetion;
 
 @Service
 public class TecnicoService {
@@ -28,7 +30,7 @@ public class TecnicoService {
 	@Transactional(readOnly = true)
 	public TecnicoDTO findById(Long id) {
 		Optional<Tecnico> obj = repository.findById(id);
-		Tecnico entity = obj.orElseThrow(() -> new EntityNotFoundExcepetion("Tecnico não encontrado"));
+		Tecnico entity = obj.orElseThrow(() -> new ResourceNotFoundExcepetion("Tecnico não encontrado"));
 		return new TecnicoDTO(entity);
 	}
 	
@@ -43,4 +45,23 @@ public class TecnicoService {
 		return new TecnicoDTO(entity);
 		
 	}
+	
+	@Transactional
+	public TecnicoDTO update(Long id, TecnicoDTO dto) {
+		try {
+			Tecnico entity = repository.getById(id);
+			entity.setNome(dto.getNome());
+			entity.setTelefone(dto.getTelefone());
+			entity.setEmail(dto.getEmail());
+			entity.setSenha(dto.getSenha());
+			entity = repository.save(entity);
+			return new TecnicoDTO(entity);
+			
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundExcepetion("O recurso com o ID = "+id+" não foi localizado");
+		}
+		
+	}
+
+	
 }
