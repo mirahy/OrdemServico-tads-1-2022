@@ -36,13 +36,18 @@ public class TecnicoService {
 	
 	@Transactional
 	public TecnicoDTO insert(TecnicoDTO dto){
-		Tecnico entity = new Tecnico();
-		entity.setNome(dto.getNome());
-		entity.setTelefone(dto.getTelefone());
-		entity.setEmail(dto.getEmail());
-		entity.setSenha(dto.getSenha());
-		entity = repository.save(entity);
-		return new TecnicoDTO(entity);
+		try {
+			Tecnico entity = new Tecnico();
+			entity.setNome(dto.getNome());
+			entity.setTelefone(dto.getTelefone());
+			entity.setEmail(dto.getEmail());
+			entity.setSenha(dto.getSenha());
+			entity = repository.save(entity);
+			return new TecnicoDTO(entity);	
+		}catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundExcepetion("Não foin possivel cadastrar!");
+		}
+		
 		
 	}
 	
@@ -55,6 +60,19 @@ public class TecnicoService {
 			entity.setEmail(dto.getEmail());
 			entity.setSenha(dto.getSenha());
 			entity = repository.save(entity);
+			return new TecnicoDTO(entity);
+			
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundExcepetion("O recurso com o ID = "+id+" não foi localizado");
+		}
+		
+	}
+	
+	@Transactional
+	public TecnicoDTO delete(Long id) {
+		try {
+			Tecnico entity = repository.getById(id);
+			repository.delete(entity);
 			return new TecnicoDTO(entity);
 			
 		} catch (EntityNotFoundException e) {
