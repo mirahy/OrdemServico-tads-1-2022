@@ -38,6 +38,12 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(dto);
 	}
 	
+	@GetMapping(value = "/[]")
+	public ResponseEntity<List<TecnicoDTO>> findAllListId(@PathVariable List<Long> ids) {
+		List<TecnicoDTO> list = service.findAllListId(ids);
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> insert(@RequestBody TecnicoDTO dto){
 		dto = service.insert(dto);

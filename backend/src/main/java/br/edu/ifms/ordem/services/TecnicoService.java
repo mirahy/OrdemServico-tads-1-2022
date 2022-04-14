@@ -34,6 +34,12 @@ public class TecnicoService {
 		return new TecnicoDTO(entity);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<TecnicoDTO> findAllListId(List<Long> id) {
+		List<Tecnico> list = repository.findAllById(id);
+		return list.stream().map(t -> new TecnicoDTO(t)).collect(Collectors.toList());
+	}
+	
 	@Transactional
 	public TecnicoDTO insert(TecnicoDTO dto){
 		try {
@@ -45,7 +51,7 @@ public class TecnicoService {
 			entity = repository.save(entity);
 			return new TecnicoDTO(entity);	
 		}catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundExcepetion("Não foin possivel cadastrar!");
+			throw new ResourceNotFoundExcepetion("Não foi possivel cadastrar!");
 		}
 		
 		
