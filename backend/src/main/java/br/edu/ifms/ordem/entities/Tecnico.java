@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.edu.ifms.ordem.dto.TecnicoDTO;
+
 @Entity
 @Table(name = "tb_tecnico")
 public class Tecnico implements Serializable {
@@ -32,6 +34,14 @@ public class Tecnico implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
+	}
+
+	public void setData(TecnicoDTO dto) {
+		this.nome = dto.getNome();
+		this.telefone = dto.getTelefone();
+		this.email = dto.getEmail();
+		this.senha = dto.getSenha();
+
 	}
 
 	public Long getId() {

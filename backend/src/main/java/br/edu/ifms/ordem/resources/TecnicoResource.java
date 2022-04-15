@@ -3,7 +3,6 @@ package br.edu.ifms.ordem.resources;
 import java.net.URI;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,29 +36,36 @@ public class TecnicoResource {
 		TecnicoDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
-	@GetMapping(value = "/[]")
+
+	@GetMapping(value = "/")
 	public ResponseEntity<List<TecnicoDTO>> findAllListId(@PathVariable List<Long> ids) {
 		List<TecnicoDTO> list = service.findAllListId(ids);
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> insert(@RequestBody TecnicoDTO dto){
+	public ResponseEntity<TecnicoDTO> insert(@RequestBody TecnicoDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO> update(@PathVariable Long id, @RequestBody TecnicoDTO dto){
+	public ResponseEntity<TecnicoDTO> update(@PathVariable Long id, @RequestBody TecnicoDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
+	/*
+	 * @DeleteMapping(value = "/{id}") public ResponseEntity<TecnicoDTO>
+	 * delete(@PathVariable Long id){ TecnicoDTO dto = service.delete(id); return
+	 * ResponseEntity.ok().body(dto); }
+	 */
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<TecnicoDTO> delete(@PathVariable Long id){
-		TecnicoDTO dto = service.delete(id);
-		return ResponseEntity.ok().body(dto);
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
+
 }
