@@ -9,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,12 @@ public class TecnicoService {
 	public List<TecnicoDTO> findAll() {
 		List<Tecnico> list = repository.findAll();
 		return list.stream().map(t -> new TecnicoDTO(t)).collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<TecnicoDTO> findAllPaged(PageRequest pageRequest) {
+		Page<Tecnico> list = repository.findAll(pageRequest);
+		return list.map(x -> new TecnicoDTO(x));
 	}
 
 	@Transactional(readOnly = true)
@@ -92,5 +100,6 @@ public class TecnicoService {
 		}
 
 	}
+
 
 }
