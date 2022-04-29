@@ -2,7 +2,6 @@ package br.edu.ifms.ordem.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,28 +9,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import br.edu.ifms.ordem.dto.TecnicoDTO;
-
 @Entity
-@Table(name = "tb_tecnico")
-public class Tecnico implements Serializable {
+@Table(name = "tb_equipamento")
+public class Equipamento implements Serializable{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto incremento
-	private Long id;
-	private String nome;
-	private String telefone;
-	private String email;
-	private String senha;
 	
-	@OneToMany(mappedBy = "tecnico")
-	private List<OrdemServico> ordensServico;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String equipamento;
+	private String patrimonio;
+	private String setor;
 	
 	/**
 	 * audit information
@@ -43,25 +35,8 @@ public class Tecnico implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
 	
-
-	public Tecnico() {
-
-	}
-
-	public Tecnico(Long id, String nome, String telefone, String email, String senha) {
-		this.id = id;
-		this.nome = nome;
-		this.telefone = telefone;
-		this.email = email;
-		this.senha = senha;
-	}
-
-	public void setData(TecnicoDTO dto) {
-		this.nome = dto.getNome();
-		this.telefone = dto.getTelefone();
-		this.email = dto.getEmail();
-		this.senha = dto.getSenha();
-
+	public Equipamento() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -72,46 +47,39 @@ public class Tecnico implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getEquipamento() {
+		return equipamento;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setEquipamento(String equipamento) {
+		this.equipamento = equipamento;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getPatrimonio() {
+		return patrimonio;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPatrimonio(String patrimonio) {
+		this.patrimonio = patrimonio;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getSetor() {
+		return setor;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSetor(String setor) {
+		this.setor = setor;
 	}
 	
+
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
-
+	
 	public Instant getUpdatedAt() {
 		return updatedAt;
 	}
-	
+
 	@PrePersist
 	public void prePersist() {
 		createdAt = Instant.now();
@@ -135,8 +103,10 @@ public class Tecnico implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tecnico other = (Tecnico) obj;
+		Equipamento other = (Equipamento) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	
 
 }
