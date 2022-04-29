@@ -1,4 +1,4 @@
-package br.edu.ifms.ordem;
+package br.edu.ifms.ordem.dto;
 
 import java.io.Serializable;
 

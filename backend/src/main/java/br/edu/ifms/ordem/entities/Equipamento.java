@@ -13,6 +13,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import br.edu.ifms.ordem.dto.EquipamentoDTO;
+
 @Entity
 @Table(name = "tb_equipamento")
 public class Equipamento implements Serializable{
@@ -36,7 +38,21 @@ public class Equipamento implements Serializable{
 	private Instant updatedAt;
 	
 	public Equipamento() {
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	public Equipamento(Long id, String equipamento, String patrimonio, String setor) {
+		this.id = id;
+		this.equipamento = equipamento;
+		this.patrimonio = patrimonio;
+		this.setor = setor;
+	}
+
+	public void setData(EquipamentoDTO dto) {
+		this.id = dto.getId();
+		this.equipamento = dto.getEquipamento();
+		this.patrimonio = dto.getPatrimonio();
+		this.setor = dto.getSetor();
 	}
 
 	public Long getId() {

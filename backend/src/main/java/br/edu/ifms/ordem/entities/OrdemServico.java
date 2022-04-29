@@ -19,6 +19,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import br.edu.ifms.ordem.dto.OrdemServicoDTO;
+
+
 @Entity
 @Table(name = "tb_ordem_servico")
 public class OrdemServico implements Serializable{
@@ -56,9 +59,34 @@ public class OrdemServico implements Serializable{
 	
 	
 	public OrdemServico() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
+	public OrdemServico(Long id, String descricaoProblema, String descricaoSolucao, Instant dataCadastro, Status status,
+			Prioridade prioridade, Tecnico tecnico, Set<Equipamento> equipamento) {
+		this.id = id;
+		this.descricaoProblema = descricaoProblema;
+		this.descricaoSolucao = descricaoSolucao;
+		this.dataCadastro = dataCadastro;
+		this.status = status;
+		this.prioridade = prioridade;
+		this.tecnico = tecnico;
+		this.equipamento = equipamento;
+	}
+	
+	public void setData(OrdemServicoDTO dto) {
+		this.id = dto.getId();
+		this.descricaoProblema = dto.getDescricaoProblema();
+		this.descricaoSolucao = dto.getDescricaoSolucao();
+		this.dataCadastro = dto.getDataCadastro();
+		this.status = dto.getStatus();
+		this.prioridade = dto.getPrioridade();
+		this.tecnico = dto.getTecnico();
+		this.equipamento = dto.getEquipamento();
+	}
+
+
+
 	public enum Status{
 		PENDENTE, CANCELADO, EFETIVADO;
 	}

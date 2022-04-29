@@ -14,50 +14,50 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.ifms.ordem.dto.TecnicoDTO;
-import br.edu.ifms.ordem.entities.Tecnico;
-import br.edu.ifms.ordem.repositories.TecnicoRepository;
+import br.edu.ifms.ordem.dto.OrdemServicoDTO;
+import br.edu.ifms.ordem.entities.OrdemServico;
+import br.edu.ifms.ordem.repositories.OrdemServicoRepository;
 import br.edu.ifms.ordem.services.exceptions.DataBaseExcepetion;
 import br.edu.ifms.ordem.services.exceptions.ResourceNotFoundExcepetion;
 
 @Service
-public class TecnicoService {
-
+public class OrdemServicoService {
+	
 	@Autowired
-	private TecnicoRepository repository;
+	private OrdemServicoRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<TecnicoDTO> findAll() {
-		List<Tecnico> list = repository.findAll();
-		return list.stream().map(t -> new TecnicoDTO(t)).collect(Collectors.toList());
+	public List<OrdemServicoDTO> findAll() {
+		List<OrdemServico> list = repository.findAll();
+		return list.stream().map(t -> new OrdemServicoDTO(t)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<TecnicoDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Tecnico> list = repository.findAll(pageRequest);
-		return list.map(x -> new TecnicoDTO(x));
+	public Page<OrdemServicoDTO> findAllPaged(PageRequest pageRequest) {
+		Page<OrdemServico> list = repository.findAll(pageRequest);
+		return list.map(x -> new OrdemServicoDTO(x));
 	}
 
 	@Transactional(readOnly = true)
-	public TecnicoDTO findById(Long id) {
-		Optional<Tecnico> obj = repository.findById(id);
-		Tecnico entity = obj.orElseThrow(() -> new ResourceNotFoundExcepetion("Tecnico não encontrado"));
-		return new TecnicoDTO(entity);
+	public OrdemServicoDTO findById(Long id) {
+		Optional<OrdemServico> obj = repository.findById(id);
+		OrdemServico entity = obj.orElseThrow(() -> new ResourceNotFoundExcepetion("Ordem de serviço não encontrado"));
+		return new OrdemServicoDTO(entity);
 	}
 
 	@Transactional(readOnly = true)
-	public List<TecnicoDTO> findAllListId(List<Long> id) {
-		List<Tecnico> list = repository.findAllById(id);
-		return list.stream().map(t -> new TecnicoDTO(t)).collect(Collectors.toList());
+	public List<OrdemServicoDTO> findAllListId(List<Long> id) {
+		List<OrdemServico> list = repository.findAllById(id);
+		return list.stream().map(t -> new OrdemServicoDTO(t)).collect(Collectors.toList());
 	}
 
 	@Transactional
-	public TecnicoDTO insert(TecnicoDTO dto) {
+	public OrdemServicoDTO insert(OrdemServicoDTO dto) {
 		try {
-			Tecnico entity = new Tecnico();
+			OrdemServico entity = new OrdemServico();
 			entity.setData(dto);
 			entity = repository.save(entity);
-			return new TecnicoDTO(entity);
+			return new OrdemServicoDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundExcepetion("Não foi possivel cadastrar!");
 		}
@@ -65,12 +65,12 @@ public class TecnicoService {
 	}
 
 	@Transactional
-	public TecnicoDTO update(Long id, TecnicoDTO dto) {
+	public OrdemServicoDTO update(Long id, OrdemServicoDTO dto) {
 		try {
-			Tecnico entity = repository.getById(id);
+			OrdemServico entity = repository.getById(id);
 			entity.setData(dto);
 			entity = repository.save(entity);
-			return new TecnicoDTO(entity);
+			return new OrdemServicoDTO(entity);
 
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundExcepetion("O recurso com o ID = " + id + " não foi localizado");
@@ -78,9 +78,9 @@ public class TecnicoService {
 	}
 
 	/*
-	 * @Transactional public TecnicoDTO delete(Long id) { try { Tecnico entity =
+	 * @Transactional public OrdemServicoDTO delete(Long id) { try { OrdemServico entity =
 	 * repository.getById(id); repository.delete(entity); return new
-	 * TecnicoDTO(entity);
+	 * OrdemServicoDTO(entity);
 	 * 
 	 * } catch (EntityNotFoundException e) { throw new
 	 * ResourceNotFoundExcepetion("O recurso com o ID = "+id+" não foi localizado");
@@ -100,6 +100,5 @@ public class TecnicoService {
 		}
 
 	}
-
 
 }
