@@ -2,8 +2,12 @@ package br.edu.ifms.ordem.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
+import br.edu.ifms.ordem.entities.Equipamento;
 import br.edu.ifms.ordem.entities.OrdemServico;
+import br.edu.ifms.ordem.entities.Tecnico;
 import br.edu.ifms.ordem.entities.OrdemServico.Prioridade;
 import br.edu.ifms.ordem.entities.OrdemServico.Status;
 
@@ -16,6 +20,8 @@ public class OrdemServicoDTO implements Serializable{
 	private Instant dataCadastro;
 	private Status status;
 	private Prioridade prioridade;
+	private Tecnico tecnico;
+	Set<Equipamento> equipamento = new HashSet<>();
 	
 	public OrdemServicoDTO() {
 	
@@ -88,6 +94,22 @@ public class OrdemServicoDTO implements Serializable{
 
 	public void setPrioridade(Prioridade prioridade) {
 		this.prioridade = prioridade;
+	}
+
+	public Tecnico getTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(Tecnico tecnico) {
+		this.tecnico = tecnico;
+	}
+
+	public Set<Equipamento> getEquipamento() {
+		return equipamento;
+	}
+
+	public void setEquipamento(Set<Equipamento> equipamento) {
+		this.equipamento = equipamento;
 	}
 	
 	
