@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import br.edu.ifms.ordem.dto.OrdemServicoDTO;
+import br.edu.ifms.ordem.entities.enums.Prioridade;
+import br.edu.ifms.ordem.entities.enums.Status;
 
 
 @Entity
@@ -33,7 +37,9 @@ public class OrdemServico implements Serializable{
 	private String descricaoProblema;
 	private String descricaoSolucao;
 	private Instant dataCadastro;
+	@Enumerated(EnumType.STRING)
 	private Status status;
+	@Enumerated(EnumType.STRING)
 	private Prioridade prioridade;
 	
 	@ManyToOne
@@ -82,18 +88,9 @@ public class OrdemServico implements Serializable{
 		this.status = dto.getStatus();
 		this.prioridade = dto.getPrioridade();
 		this.tecnico = dto.getTecnico();
-		this.equipamento = dto.getEquipamento();
+		this.equipamento = (Set) dto.getEquipamentos();
 	}
 
-
-
-	public enum Status{
-		PENDENTE, CANCELADO, EFETIVADO;
-	}
-	
-	public enum Prioridade{
-		BAIXA, MEDIA, ALTA;
-	}
 
 	public Long getId() {
 		return id;
@@ -127,6 +124,7 @@ public class OrdemServico implements Serializable{
 		this.dataCadastro = dataCadastro;
 	}
 
+	
 	public Status getStatus() {
 		return status;
 	}
@@ -142,7 +140,7 @@ public class OrdemServico implements Serializable{
 	public void setPrioridade(Prioridade prioridade) {
 		this.prioridade = prioridade;
 	}
-	
+
 	public Tecnico getTecnico() {
 		return tecnico;
 	}
@@ -153,10 +151,6 @@ public class OrdemServico implements Serializable{
 
 	public Set<Equipamento> getEquipamento() {
 		return equipamento;
-	}
-
-	public void setEquipamento(Set<Equipamento> equipamento) {
-		this.equipamento = equipamento;
 	}
 
 	public Instant getCreatedAt() {

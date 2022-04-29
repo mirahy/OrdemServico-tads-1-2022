@@ -3,6 +3,7 @@ package br.edu.ifms.ordem.resources;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -25,6 +26,7 @@ import br.edu.ifms.ordem.services.OrdemServicoService;
 @RequestMapping(value = "/ordem")
 public class OrdemServicoResource {
 	
+	@Autowired
 	private OrdemServicoService service;
 
 	

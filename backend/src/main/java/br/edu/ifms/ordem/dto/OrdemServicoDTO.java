@@ -2,14 +2,16 @@ package br.edu.ifms.ordem.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import br.edu.ifms.ordem.entities.Equipamento;
 import br.edu.ifms.ordem.entities.OrdemServico;
 import br.edu.ifms.ordem.entities.Tecnico;
-import br.edu.ifms.ordem.entities.OrdemServico.Prioridade;
-import br.edu.ifms.ordem.entities.OrdemServico.Status;
+import br.edu.ifms.ordem.entities.enums.Prioridade;
+import br.edu.ifms.ordem.entities.enums.Status;
+
 
 public class OrdemServicoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,22 +23,23 @@ public class OrdemServicoDTO implements Serializable{
 	private Status status;
 	private Prioridade prioridade;
 	private Tecnico tecnico;
-	Set<Equipamento> equipamento = new HashSet<>();
+	private List<EquipamentoDTO> equipamentos = new ArrayList<>();
 	
 	public OrdemServicoDTO() {
 	
 	}
 	
 	public OrdemServicoDTO(Long id, String descricaoProblema, String descricaoSolucao, Instant dataCadastro,
-			Status status, Prioridade prioridade) {
+			Status status, Prioridade prioridade, Tecnico tecnico) {
+		super();
 		this.id = id;
 		this.descricaoProblema = descricaoProblema;
 		this.descricaoSolucao = descricaoSolucao;
 		this.dataCadastro = dataCadastro;
 		this.status = status;
 		this.prioridade = prioridade;
+		this.tecnico = tecnico;
 	}
-
 
 	public OrdemServicoDTO(OrdemServico entity) {
 		this.id = entity.getId();
@@ -45,6 +48,12 @@ public class OrdemServicoDTO implements Serializable{
 		this.dataCadastro = entity.getDataCadastro();
 		this.status = entity.getStatus();
 		this.prioridade = entity.getPrioridade();
+		this.tecnico = entity.getTecnico();
+	}
+	
+	public OrdemServicoDTO(OrdemServico entity, Set<Equipamento> equipamentos) {
+		this(entity);
+		equipamentos.forEach(equipamento -> new EquipamentoDTO(equipamento));
 	}
 
 
@@ -104,13 +113,10 @@ public class OrdemServicoDTO implements Serializable{
 		this.tecnico = tecnico;
 	}
 
-	public Set<Equipamento> getEquipamento() {
-		return equipamento;
+	public List<EquipamentoDTO> getEquipamentos() {
+		return equipamentos;
 	}
 
-	public void setEquipamento(Set<Equipamento> equipamento) {
-		this.equipamento = equipamento;
-	}
 	
 	
 

@@ -48,20 +48,25 @@ public class Tecnico implements Serializable {
 
 	}
 
-	public Tecnico(Long id, String nome, String telefone, String email, String senha) {
+	public Tecnico(Long id, String nome, String telefone, String email, String senha,
+			List<OrdemServico> ordensServico) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
+		this.ordensServico = ordensServico;
 	}
+
+
 
 	public void setData(TecnicoDTO dto) {
 		this.nome = dto.getNome();
 		this.telefone = dto.getTelefone();
 		this.email = dto.getEmail();
 		this.senha = dto.getSenha();
-
+		this.ordensServico = dto.getOrdensServico();
 	}
 
 	public Long getId() {
@@ -120,6 +125,10 @@ public class Tecnico implements Serializable {
 	@PreUpdate
 	public void preUpdate() {
 		updatedAt = Instant.now();
+	}
+
+	public List<OrdemServico> getOrdensServico() {
+		return ordensServico;
 	}
 
 	@Override
