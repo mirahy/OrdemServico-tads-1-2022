@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -25,7 +27,10 @@ public class Equipamento implements Serializable{
 	private Long id;
 	private String equipamento;
 	private String patrimonio;
-	private String setor;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_setor_fk")
+	private Setor setor;
 	
 	/**
 	 * audit information
@@ -41,7 +46,7 @@ public class Equipamento implements Serializable{
 		
 	}
 
-	public Equipamento(Long id, String equipamento, String patrimonio, String setor) {
+	public Equipamento(Long id, String equipamento, String patrimonio, Setor setor) {
 		this.id = id;
 		this.equipamento = equipamento;
 		this.patrimonio = patrimonio;
@@ -78,15 +83,15 @@ public class Equipamento implements Serializable{
 	public void setPatrimonio(String patrimonio) {
 		this.patrimonio = patrimonio;
 	}
+	
 
-	public String getSetor() {
+	public Setor getSetor() {
 		return setor;
 	}
 
-	public void setSetor(String setor) {
+	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
-	
 
 	public Instant getCreatedAt() {
 		return createdAt;

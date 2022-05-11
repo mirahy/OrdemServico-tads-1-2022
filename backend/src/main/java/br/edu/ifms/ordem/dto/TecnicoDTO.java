@@ -20,7 +20,6 @@ public class TecnicoDTO implements Serializable {
 
 	}
 
-	
 
 	public TecnicoDTO(Long id, String nome, String telefone, String email, String senha,
 			List<OrdemServico> ordensServico) {
