@@ -11,7 +11,6 @@ public class EquipamentoDTO implements Serializable{
 	private Long id;
 	private String equipamento;
 	private String patrimonio;
-	private Setor setor;
 	
 	public EquipamentoDTO() {
 		
@@ -22,14 +21,13 @@ public class EquipamentoDTO implements Serializable{
 		this.id = id;
 		this.equipamento = equipamento;
 		this.patrimonio = patrimonio;
-		this.setor = setor;
+		
 	}
 	
 	public EquipamentoDTO(Equipamento entity) {
 		this.id = entity.getId();
 		this.equipamento = entity.getEquipamento();
 		this.patrimonio = entity.getPatrimonio();
-		this.setor = entity.getSetor();
 	}
 
 	public Long getId() {
@@ -56,13 +54,6 @@ public class EquipamentoDTO implements Serializable{
 		this.patrimonio = patrimonio;
 	}
 
-	public Setor getSetor() {
-		return setor;
-	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
 
 
 }

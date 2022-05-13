@@ -81,14 +81,12 @@ public class OrdemServico implements Serializable{
 	}
 	
 	public void setData(OrdemServicoDTO dto) {
-		this.id = dto.getId();
 		this.descricaoProblema = dto.getDescricaoProblema();
 		this.descricaoSolucao = dto.getDescricaoSolucao();
 		this.dataCadastro = dto.getDataCadastro();
 		this.status = dto.getStatus();
 		this.prioridade = dto.getPrioridade();
 		this.tecnico = dto.getTecnico();
-		this.equipamento = (Set) dto.getEquipamentos();
 	}
 
 

@@ -15,7 +15,6 @@ public class SetorDTO implements Serializable {
 	private String email;
 	private String telefone;
 	private String coordenador;
-	private List<Equipamento> equipamentos;
 	
 	public SetorDTO() {
 	}
@@ -30,7 +29,6 @@ public class SetorDTO implements Serializable {
 		this.email = email;
 		this.telefone = telefone;
 		this.coordenador = coordenador;
-		this.equipamentos = equipamentos;
 	}
 	
 	public SetorDTO(Setor entity) {
@@ -40,7 +38,6 @@ public class SetorDTO implements Serializable {
 		this.email = entity.getEmail();
 		this.telefone = entity.getTelefone();
 		this.coordenador = entity.getCoordenador();
-		this.equipamentos = entity.getEquipamentos();
 	}
 
 
@@ -92,16 +89,5 @@ public class SetorDTO implements Serializable {
 		this.coordenador = coordenador;
 	}
 
-
-	public List<Equipamento> getEquipamentos() {
-		return equipamentos;
-	}
-
-
-	public void setEquipamentos(List<Equipamento> equipamentos) {
-		this.equipamentos = equipamentos;
-	}
-	
-	
 
 }

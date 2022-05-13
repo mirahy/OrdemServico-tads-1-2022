@@ -49,8 +49,7 @@ public class Setor implements Serializable {
 		
 	}
 	
-	public Setor(Long id, String sigla, String nome, String email, String telefone, String coordenador,
-			List<Equipamento> equipamentos) {
+	public Setor(Long id, String sigla, String nome, String email, String telefone, String coordenador) {
 		super();
 		this.id = id;
 		this.sigla = sigla;
@@ -58,17 +57,14 @@ public class Setor implements Serializable {
 		this.email = email;
 		this.telefone = telefone;
 		this.coordenador = coordenador;
-		this.equipamentos = equipamentos;
 	}
 	
 	public void setData(SetorDTO dto) {
-		this.id = dto.getId();
 		this.sigla = dto.getSigla();
 		this.nome = dto.getNome();
 		this.email = dto.getEmail();
 		this.telefone = dto.getTelefone();
 		this.coordenador = dto.getCoordenador();
-		this.equipamentos = dto.getEquipamentos();
 	}
 
 

@@ -14,7 +14,6 @@ public class TecnicoDTO implements Serializable {
 	private String telefone;
 	private String email;
 	private String senha;
-	private List<OrdemServico> ordensServico;
 
 	public TecnicoDTO() {
 
@@ -28,7 +27,6 @@ public class TecnicoDTO implements Serializable {
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.ordensServico = ordensServico;
 	}
 
 
@@ -39,7 +37,6 @@ public class TecnicoDTO implements Serializable {
 		this.telefone = entity.getTelefone();
 		this.email = entity.getEmail();
 		this.senha = entity.getSenha();
-		this.ordensServico = entity.getOrdensServico();
 	}
 
 	public Long getId() {
@@ -82,9 +79,6 @@ public class TecnicoDTO implements Serializable {
 		this.senha = senha;
 	}
 
-	public List<OrdemServico> getOrdensServico() {
-		return ordensServico;
-	}
 	
 
 }

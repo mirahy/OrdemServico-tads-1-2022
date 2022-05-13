@@ -54,10 +54,8 @@ public class Equipamento implements Serializable{
 	}
 
 	public void setData(EquipamentoDTO dto) {
-		this.id = dto.getId();
 		this.equipamento = dto.getEquipamento();
 		this.patrimonio = dto.getPatrimonio();
-		this.setor = dto.getSetor();
 	}
 
 	public Long getId() {

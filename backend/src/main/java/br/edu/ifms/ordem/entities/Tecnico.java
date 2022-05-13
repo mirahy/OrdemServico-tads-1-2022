@@ -48,15 +48,12 @@ public class Tecnico implements Serializable {
 
 	}
 
-	public Tecnico(Long id, String nome, String telefone, String email, String senha,
-			List<OrdemServico> ordensServico) {
-		super();
+	public Tecnico(Long id, String nome, String telefone, String email, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.ordensServico = ordensServico;
 	}
 
 
@@ -66,7 +63,6 @@ public class Tecnico implements Serializable {
 		this.telefone = dto.getTelefone();
 		this.email = dto.getEmail();
 		this.senha = dto.getSenha();
-		this.ordensServico = dto.getOrdensServico();
 	}
 
 	public Long getId() {
